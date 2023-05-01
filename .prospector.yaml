@@ -2,9 +2,6 @@ strictness: veryhigh
 doc-warnings: true
 max-line-length: 110
 
-ignore-paths:
-  - jsonschema_validator/json_schema.py
-
 pydocstyle:
   disable:
     - D212 # Multi-line docstring summary should start at the first line
