@@ -1,6 +1,23 @@
 # Pyramid OGC API
 
 Tools used to facilitate the development of OGC API services with Pyramid.
+Provide template the the HTML vies of the API, have a generic one for la kind of view.
+Automatically create the routes and the views based on the OpenAPI 3 specification file and the OGC API common consideration.
+Provide some functions to facilitate the create of the template.
+Provide some functions to facilitate the create of the api.
+Provide some functions to facilitate the creation od an OpenLayers Map.
+
+OGC API common consideration that we will consider to create some facilitation:
+
+- The f argument to switch between the HTML and the JSON view.
+- The link definition.
+- The paging definition.
+
+It will also provide an example of the OGC API Feature service with:
+
+- The crs parameter..
+- The CQL filter based on (pygeofiler)[https://pypi.org/project/pygeofilter/].
+- The CRUD interface.
 
 ## Installation
 
