@@ -29,7 +29,6 @@ jobs:
       - run: echo "${HOME}/.local/bin" >> ${GITHUB_PATH}
       - run: python3 -m pip install --user --requirement=ci/requirements.txt
 
-      - run: pip install -e .
       - uses: actions/cache@v3
         with:
           path: ~/.cache/pre-commit
@@ -43,8 +42,9 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
-      - run: make prospector
-      - run: make pytest
+      - run: poetry install
+      - run: poetry run prospector --output=pylint --exit-on-tool-error
+      - run: poetry run pytest
 
       - name: Init pypi
         run: |
