@@ -43,7 +43,7 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
       - run: poetry install
-      - run: poetry run prospector --output=pylint --exit-on-tool-error
+      - run: poetry run prospector --output=pylint --die-on-tool-error
       - run: poetry run pytest
 
       - name: Init pypi
