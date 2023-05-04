@@ -3,7 +3,7 @@ Pyramid OGC API extension.
 """
 
 import logging
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, cast
 
 import pyramid.config
 import pyramid.request
@@ -22,17 +22,23 @@ class _OgcType:
         del config
         self.val = val
 
-    def phash(self):
+    def phash(self) -> str:
+        """Return a string that uniquely identifies the predicate."""
+
         return f"ogc_type = {self.val}"
 
-    def __call__(self, context, request):
+    def __call__(self, context: Any, request: pyramid.request.Request) -> bool:
+        """Return a true value if the predicate should be used."""
+
+        del context
+
         if request.params.get("f") in ["html", "json"]:
             _LOG.error(request.params["f"].lower() == self.val)
-            return request.params["f"].lower() == self.val
+            return request.params["f"].lower() == self.val  # type: ignore
         _LOG.error(dict(request.headers))
         if request.headers.get("Accept", "*/*") == "*/*":
             return self.val == "json"
-        return request.accept.best_match(["text/html", "application/json"]).split("/")[1] == self.val
+        return request.accept.best_match(["text/html", "application/json"]).split("/")[1] == self.val  # type: ignore
 
 
 def register_routes(
@@ -50,12 +56,18 @@ def register_routes(
     :param root_factory_ext: Extension's key for using a ``factory`` argument
     """
 
+    if path_template is None:
+        path_template = {}
+
     def action() -> None:
+        assert path_template is not None
+
         config.add_route_predicate("ogc_type", _OgcType)
 
         spec = config.registry.settings[apiname]["spec"]
         for pattern in spec["paths"].keys():
-            route_name = (
+            route_name = ("" if route_prefix is None else route_prefix) + cast(
+                str,
                 "landing_page"
                 if pattern == "/"
                 else pattern.lstrip("/")
@@ -102,19 +114,3 @@ def register_routes(
                 )
 
     config.action(("pyramid_openapi3_register_routes",), action, order=pyramid.config.PHASE1_CONFIG)
-
-
-def request_dict(func):
-    """Decorate a pyramid view to get typed request dict, type build with jsonschema-gentypes."""
-
-    def wrapper(request: pyramid.request.Request, **kwargs) -> Any:
-        typed_request = {}
-        try:
-            typed_request["request_body"] = request.json
-        except Exception:
-            pass
-        typed_request["path"] = request.matchdict
-        typed_request["query"] = request.params
-        return func(request, request_typed=typed_request, **kwargs)
-
-    return wrapper
