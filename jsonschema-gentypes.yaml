@@ -1,0 +1,16 @@
+headers: |
+  """
+  Automatically generated file from a JSON schema.
+  """
+
+pre_commit:
+  enabled: true
+  hooks_skip:
+    - jsonschema-gentypes
+    - shellcheck
+  arguments:
+    - --color=never
+
+generate:
+  - source: acceptance_tests/ogcapi-features-schema.yaml
+    destination: acceptance_tests/pyramid_ogcapi_test_app/ogcapi_features.py

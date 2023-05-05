@@ -60,6 +60,18 @@ def myview(
 
 Integrate with [jsonschema_gentypes](https://pypi.org/project/jsonschema-gentypes/)
 
+## Start example
+
+Run the example:
+
+```bash
+make run
+```
+
+Open the [Swagger UI](http://localhost:6543/ogcapi/docs/).
+
+Open the [OpenAPI main page](http://localhost:6543/ogcapi/).
+
 ## Contributing
 
 Install the pre-commit hooks:
