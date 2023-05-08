@@ -5,6 +5,7 @@ target-version = ['py38']
 [tool.isort]
 profile = "black"
 line_length = 110
+known_first_party = "pyramid_ogcapi"
 
 [tool.mypy]
 python_version = 3.8
@@ -39,11 +40,17 @@ classifiers = [
 [tool.poetry.dependencies]
 python = ">=3.8,<4"
 pyramid-openapi3 = "0.16.0"
+c2cwsgiutils = { version = "5.2.2", optional = true, extras = ["all"] }
+pyramid-mako = "1.1.0"
+openapi-core = "0.16.6"
 
 [tool.poetry.dev-dependencies]
 prospector = { extras = ["with_mypy", "with_bandit", "with_pyroma"], version = "1.9.0" }
 pytest = "7.2.2"
 pytest-cov = "4.0.0"
+
+[tool.poetry.extras]
+application = ["c2cwsgiutils"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning", "poetry-plugin-tweak-dependencies-version"]

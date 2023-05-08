@@ -4,9 +4,7 @@ checks:
   codespell: false
   black: false
   isort: false
+  prettier: false
 
-audit:
-  snyk:
-    pip_install_arguments:
-      - --user
-      - --ignore-installed
+publish:
+  docker: false

@@ -1,0 +1,11 @@
+version: '2.2'
+
+services:
+  application:
+    command:
+      - pserve
+      - --reload
+      - c2c:///app/application.ini
+    volumes:
+      - ./pyramid_ogcapi:/usr/local/lib/python3.10/dist-packages/pyramid_ogcapi
+      - ./acceptance_tests/pyramid_ogcapi_test_app:/app/pyramid_ogcapi_test_app

@@ -1,0 +1,22 @@
+[tool.black]
+line-length = 110
+target-version = ['py38']
+
+[tool.isort]
+profile = "black"
+line_length = 110
+
+[tool.poetry]
+name = "pyramid_ogcapi_test_app"
+description = "A package used to test the pyramid-ogcapi"
+version = "0.0.0"
+packages = [{ include = "pyramid_ogcapi_test_app" }]
+license = "BSD-2-Clause"
+authors = ["Stéphane Brunner <stephane.brunner@camptocamp.com>"]
+
+[tool.poetry.plugins."paste.app_factory"]
+main = "pyramid_ogcapi_test_app:main"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

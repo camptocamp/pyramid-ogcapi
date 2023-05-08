@@ -42,16 +42,13 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
-      - run: poetry install
+      - run: poetry install --extras=application
       - run: poetry run prospector --output=pylint --die-on-tool-error
       - run: poetry run pytest
 
-      - name: Init pypi
-        run: |-
-          echo "[pypi]" > ~/.pypirc
-          echo "username = ${{ secrets.PYPI_USERNAME }}" >> ~/.pypirc
-          echo "password = ${{ secrets.PYPI_PASSWORD }}" >> ~/.pypirc
-        if: env.HAS_SECRETS == 'HAS_SECRETS'
+      - run: make build
+      - run: make run
+      - run: c2cciutils-docker-logs
 
       - name: Publish
         run: c2cciutils-publish
