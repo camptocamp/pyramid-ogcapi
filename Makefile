@@ -16,3 +16,15 @@ build: ## Build the acceptences test application Docker image
 run: ## Run the acceptences application Docker image
 run: build
 	docker-compose up -d
+
+.PHONY: tests
+tests: ## Run the unit tests
+tests:
+	poetry install
+	poetry run pytest -v tests
+
+
+.PHONY: acceptance-tests
+acceptance-tests: ## Run the acceptance tests
+acceptance-tests: run
+	docker-compose exec -T application pytest -v

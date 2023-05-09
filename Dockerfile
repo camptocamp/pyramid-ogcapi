@@ -21,7 +21,7 @@ RUN --mount=type=cache,target=/root/.cache \
 # Do the conversion
 COPY poetry.lock pyproject.toml ./
 ENV POETRY_DYNAMIC_VERSIONING_BYPASS=0.0.0
-RUN poetry export --extras=application --output=/poetry/requirements.txt
+RUN poetry export --extras=application --with=dev --output=/poetry/requirements.txt
 
 # Base, the biggest thing is to install the Python packages
 FROM base-all as run
@@ -44,7 +44,9 @@ COPY acceptance_tests/pyproject.toml ./
 RUN pip install --disable-pip-version-check --no-deps --editable=. \
   && python3 -m compileall -q .
 
-COPY acceptance_tests/application.ini acceptance_tests/gunicorn.conf.py acceptance_tests/ogcapi-features-schema.yaml ./
+COPY acceptance_tests/tests ./tests
+
+COPY acceptance_tests/*.ini acceptance_tests/gunicorn.conf.py acceptance_tests/ogcapi-features-schema.yaml ./
 
 CMD ["gunicorn", "--paste=application.ini"]
 
