@@ -14,8 +14,8 @@ worker_class = "gthread"
 workers = os.environ.get("GUNICORN_WORKERS", 2)
 threads = os.environ.get("GUNICORN_THREADS", 10)
 
-paste = get_paste_config()
-wsgi_app = paste
+config_filename = get_paste_config()
+wsgi_app = config_filename
 
 accesslog = "-"
 access_log_format = os.environ.get(
@@ -27,7 +27,7 @@ access_log_format = os.environ.get(
 # logging configuration
 # https://docs.python.org/3/library/logging.config.html#logging-config-dictschema
 ###
-logconfig_dict = get_logconfig_dict(paste)
+logconfig_dict = get_logconfig_dict(config_filename)
 if os.environ.get("DEBUG_LOGCONFIG", "0") == "1":
     print("LOGCONFIG")
     print(logconfig_dict)
