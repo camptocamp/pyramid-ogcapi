@@ -46,7 +46,7 @@ RUN pip install --disable-pip-version-check --no-deps --editable=. \
 
 COPY acceptance_tests/application.ini acceptance_tests/gunicorn.conf.py acceptance_tests/ogcapi-features-schema.yaml ./
 
-CMD ["gunicorn"]
+CMD ["gunicorn", "--paste=application.ini"]
 
 ENV \
   DEVELOPMENT=0 \
@@ -62,4 +62,5 @@ ENV \
   PGOPTIONS=-c statement_timeout=1500 \
   GUNICORN_WORKERS=1 \
   GUNICORN_THREADS=10 \
-  VISIBLE_ENTRY_POINT=/
+  VISIBLE_ENTRY_POINT=/ \
+  C2CWSGIUTILS_CONFIG=application.ini
