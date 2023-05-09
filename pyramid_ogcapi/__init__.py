@@ -33,19 +33,15 @@ class _OgcType:
 
         if request.params.get("f") in ["html", "json"]:
             return request.params["f"].lower() == self.val  # type: ignore
-        return request.accept.best_match(["text/html", "application/json"]).split("/")[1] == self.val  # type: ignore
+        return request.accept.best_match(["text/html", "application/json", "application/geo+json"]).split("/")[1].split("+")[-1] == self.val  # type: ignore
 
 
 def _get_view(
     views: Any, method_config: Any, route_name: str, path: str, helps: List[str], with_help: bool = True
 ) -> Optional[Callable[[pyramid.request.Request], Any]]:
-    example = (
-        method_config.get("responses", {})
-        .get("200", {})
-        .get("content", {})
-        .get("application/json", {})
-        .get("example", {})
-    )
+    content = method_config.get("responses", {}).get("200", {}).get("content", {})
+    json_content = content.get("application/json", {}) or content.get("application/geo+json", {})
+    example = json_content.get("example", {})
     description = method_config.get("description", "")
     description = description.content() if hasattr(description, "content") else description
     if description:
@@ -108,7 +104,14 @@ def register_routes(
             )
 
             for method, method_config in path_config.items():
-                if method == "get":
+                content = method_config.get("responses", {}).get("200", {}).get("content", {})
+                json_html = (
+                    method == "get"
+                    and ("application/json" in content or "application/geo+json" in content)
+                    and "text/html" in content
+                )
+                # Create the routes and views for the HTML and JSON based on the same data
+                if json_html:
                     config.add_route(
                         f"{route_name}_html",
                         pattern,
@@ -118,7 +121,7 @@ def register_routes(
                     config.add_view(
                         _get_view(views, method_config, route_name, pattern, helps),
                         route_name=f"{route_name}_html",
-                        renderer=json_renderer,
+                        renderer=path_template.get(pattern, "pyramid_ogcapi:templates/default.mako"),
                         openapi=True,
                     )
                     config.add_route(
@@ -134,17 +137,37 @@ def register_routes(
                         openapi=True,
                     )
 
-                else:
-                    route_name += f"_{method}"
+                method_route_name = f"{route_name}_{method}" if method != "get" else route_name
+
+                # Create the routes and views for all the other cases
+                for content_type in content.keys():
+                    if json_html and content_type in (
+                        "application/json",
+                        "application/geo+json",
+                        "text/html",
+                    ):
+                        continue
+
+                    renderer = None
+                    if content_type in ("application/json", "application/geo+json"):
+                        renderer = json_renderer
+                    elif "text/html" in content:
+                        renderer = path_template.get(pattern, "pyramid_ogcapi:templates/default.mako")
+                    current_route_name = (
+                        f"{method_route_name}_{content_type.replace('/', '_')('+', '_')('.', '_')('-', '_')}"
+                        if len(content) > 1
+                        else method_route_name
+                    )
+
                     config.add_route(
-                        route_name,
+                        current_route_name,
                         pattern,
                         request_method=method.upper(),
                     )
                     config.add_view(
-                        _get_view(views, method_config, route_name, pattern, helps),
-                        route_name=route_name,
-                        renderer=json_renderer,
+                        _get_view(views, method_config, current_route_name, pattern, helps),
+                        route_name=current_route_name,
+                        renderer=renderer,
                         openapi=True,
                     )
         _LOG.debug("Use the following code to add it:\n%s", "\n\n".join(helps))
