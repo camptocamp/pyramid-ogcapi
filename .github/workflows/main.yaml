@@ -42,12 +42,8 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
-      - run: poetry install --extras=application
-      - run: poetry run prospector --output=pylint --die-on-tool-error
-      - run: poetry run pytest
-
-      - run: make build
-      - run: make run
+      - run: make tests
+      - run: make acceptance-tests
       - run: c2cciutils-docker-logs
 
       - name: Publish
