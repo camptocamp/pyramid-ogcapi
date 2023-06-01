@@ -7,6 +7,7 @@ from typing import Any
 import pyramid.config
 import pyramid.request
 import pyramid_ogcapi
+from pyramid_ogcapi import links
 
 
 def includeme(config: pyramid.config.Configurator) -> None:
@@ -18,10 +19,13 @@ def includeme(config: pyramid.config.Configurator) -> None:
     apiname = "ogcapi_features"
     config.pyramid_openapi3_spec("/app/ogcapi-features-schema.yaml", apiname=apiname)
     config.pyramid_openapi3_add_explorer(apiname=apiname)
-    config.pyramid_ogcapi_register_routes(apiname=apiname, views=_Views())
+    config.pyramid_ogcapi_register_routes(apiname=apiname, views=_Views(apiname))
 
 
 class _Views:
+    def __init__(self, api_name: str):
+        self.api_name = api_name
+
     @pyramid_ogcapi.typed_request
     def landing_page(self, pyramid_request: pyramid.request.Request, request: Any) -> Any:
         """
@@ -30,18 +34,13 @@ class _Views:
         The landing page provides links to the API definition, the conformance
         statements and to the feature collections in this dataset.
         """
-        del pyramid_request, request  # Unused
+        del request  # Unused
 
         return {
             "title": "Buildings in Bonn",
             "description": "Access to data about buildings in the city of Bonn via a Web API that conforms to the OGC API Features specification.",
             "links": [
-                {
-                    "href": "http://data.example.org/",
-                    "rel": "self",
-                    "type": "application/json",
-                    "title": "this document",
-                },
+                links.self_link(pyramid_request, "this document"),
                 {
                     "href": "http://data.example.org/api",
                     "rel": "service-desc",
@@ -54,18 +53,8 @@ class _Views:
                     "type": "text/html",
                     "title": "the API documentation",
                 },
-                {
-                    "href": "http://data.example.org/conformance",
-                    "rel": "conformance",
-                    "type": "application/json",
-                    "title": "OGC API conformance classes implemented by this server",
-                },
-                {
-                    "href": "http://data.example.org/collections",
-                    "rel": "data",
-                    "type": "application/json",
-                    "title": "Information about the feature collections",
-                },
+                links.link(pyramid_request, self.api_name, path="/conformance", relation_type="conformance"),
+                links.link(pyramid_request, self.api_name, path="/collections", relation_type="data"),
             ],
         }
 

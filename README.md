@@ -68,9 +68,9 @@ Run the example:
 make run
 ```
 
-Open the [Swagger UI](http://localhost:6543/ogcapi/docs/).
+Open the [Swagger UI](http://localhost:9123/ogcapi/docs/).
 
-Open the [OpenAPI main page](http://localhost:6543/ogcapi/).
+Open the [OpenAPI main page](http://localhost:9123/ogcapi/).
 
 ## Contributing
 
