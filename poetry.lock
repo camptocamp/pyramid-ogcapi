@@ -1156,20 +1156,20 @@ graphviz = "*"
 
 [[package]]
 name = "openapi-core"
-version = "0.17.1"
+version = "0.16.6"
 description = "client-side and server-side support for the OpenAPI Specification v3"
 optional = false
 python-versions = ">=3.7.0,<4.0.0"
 files = [
-    {file = "openapi_core-0.17.1-py3-none-any.whl", hash = "sha256:c61175ba12987705c93d1df3dbcba4f84f9450057142cca7dc234aa03e2a59db"},
-    {file = "openapi_core-0.17.1.tar.gz", hash = "sha256:561b7e2b37b336e9c62d4634b9059d12d9bb2e1859062a39d3a0fa6afc8c9de6"},
+    {file = "openapi_core-0.16.6-py3-none-any.whl", hash = "sha256:0ce163fa5b1388cee296993fde2f1519fe6b115e3d6b2ee4eb1f5f57dc807a6c"},
+    {file = "openapi_core-0.16.6.tar.gz", hash = "sha256:ed79a6adf9b0375804eac50b9b45e282b8a18fed5f6745dacc70fc1f3ea0abc3"},
 ]
 
 [package.dependencies]
 isodate = "*"
 jsonschema-spec = ">=0.1.1,<0.2.0"
 more-itertools = "*"
-openapi-schema-validator = ">=0.4.2,<0.5.0"
+openapi-schema-validator = ">=0.3.0,<0.5"
 openapi-spec-validator = ">=0.5.0,<0.6.0"
 parse = "*"
 pathable = ">=0.4.0,<0.5.0"
@@ -1178,7 +1178,6 @@ werkzeug = "*"
 
 [package.extras]
 django = ["django (>=3.0)"]
-docs = ["sphinx (>=5.3.0,<6.0.0)", "sphinx-immaterial (>=0.11.0,<0.12.0)"]
 falcon = ["falcon (>=3.0)"]
 flask = ["flask"]
 requests = ["requests"]
@@ -2650,4 +2649,4 @@ application = ["c2cwsgiutils"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.8,<4"
-content-hash = "be1dda5b8f70692255f114020a1545f10c000f262e911b41d4dd94bf06940bc7"
+content-hash = "94c6fd916eac22180425eb32f822bef80debd71ce4a773a615274c145ee3d447"
