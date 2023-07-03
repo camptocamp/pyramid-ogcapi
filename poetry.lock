@@ -22,23 +22,6 @@ typing-extensions = ">=4"
 tz = ["python-dateutil"]
 
 [[package]]
-name = "asgiref"
-version = "3.7.2"
-description = "ASGI specs, helper code, and adapters"
-optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "asgiref-3.7.2-py3-none-any.whl", hash = "sha256:89b2ef2247e3b562a16eef663bc0e2e703ec6468e2fa8a5cd61cd449786d4f6e"},
-    {file = "asgiref-3.7.2.tar.gz", hash = "sha256:9e0ce3aa93a819ba5b45120216b23878cf6e8525eb3848653452b4192b92afed"},
-]
-
-[package.dependencies]
-typing-extensions = {version = ">=4", markers = "python_version < \"3.11\""}
-
-[package.extras]
-tests = ["mypy (>=0.800)", "pytest", "pytest-asyncio"]
-
-[[package]]
 name = "astroid"
 version = "2.15.5"
 description = "An abstract syntax tree for Python with inference support."
@@ -1157,34 +1140,31 @@ ipython = ["graphviz"]
 
 [[package]]
 name = "openapi-core"
-version = "0.17.2"
+version = "0.16.6"
 description = "client-side and server-side support for the OpenAPI Specification v3"
 optional = false
 python-versions = ">=3.7.0,<4.0.0"
 files = [
-    {file = "openapi_core-0.17.2-py3-none-any.whl", hash = "sha256:ccf4d98783749bc96e86774b4c01039977ec051c3ac99582656540be5cc74565"},
-    {file = "openapi_core-0.17.2.tar.gz", hash = "sha256:8a1f68398383b222a769f967b15161fcbd408740f44cb48a346936aa27f1ce63"},
+    {file = "openapi_core-0.16.6-py3-none-any.whl", hash = "sha256:0ce163fa5b1388cee296993fde2f1519fe6b115e3d6b2ee4eb1f5f57dc807a6c"},
+    {file = "openapi_core-0.16.6.tar.gz", hash = "sha256:ed79a6adf9b0375804eac50b9b45e282b8a18fed5f6745dacc70fc1f3ea0abc3"},
 ]
 
 [package.dependencies]
-asgiref = ">=3.6.0,<4.0.0"
 isodate = "*"
-jsonschema = ">=4.17.3,<5.0.0"
-jsonschema-spec = ">=0.1.6,<0.2.0"
-lazy-object-proxy = ">=1.7.1,<2.0.0"
+jsonschema-spec = ">=0.1.1,<0.2.0"
 more-itertools = "*"
-openapi-schema-validator = ">=0.4.2,<0.5.0"
+openapi-schema-validator = ">=0.3.0,<0.5"
 openapi-spec-validator = ">=0.5.0,<0.6.0"
 parse = "*"
+pathable = ">=0.4.0,<0.5.0"
+typing-extensions = ">=4.3.0,<5.0.0"
 werkzeug = "*"
 
 [package.extras]
-aiohttp = ["aiohttp (>=3.0)", "multidict (>=6.0.4,<7.0.0)"]
 django = ["django (>=3.0)"]
 falcon = ["falcon (>=3.0)"]
 flask = ["flask"]
 requests = ["requests"]
-starlette = ["starlette (>=0.26.1,<0.29.0)"]
 
 [[package]]
 name = "openapi-schema-validator"
@@ -2648,4 +2628,4 @@ application = ["c2cwsgiutils"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.8,<4"
-content-hash = "e8947f00f34ed77396c9b9496c91099374b542188ae0f1d5eb22720d3056e32a"
+content-hash = "f79f0fd4ec4272c1b53ccd28c33654548e4dfef050d65c77845895fe45595c78"
