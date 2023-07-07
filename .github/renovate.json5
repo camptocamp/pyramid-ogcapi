@@ -9,7 +9,7 @@
   prConcurrentLimit: 0,
   baseBranches: ['0.1', 'master'],
   'pre-commit': { enabled: true },
-  cdnurl: {
+  html: {
     fileMatch: ['\\.html?$', '\\.html?.mako$'],
   },
   lockFileMaintenance: {
