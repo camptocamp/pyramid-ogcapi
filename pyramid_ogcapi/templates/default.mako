@@ -30,6 +30,14 @@
     %endif
   </head>
   <body>
+    <script>
+      (() => {
+        'use strict'
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          document.documentElement.setAttribute('data-bs-theme', 'dark');
+        }
+      })()
+    </script>
     <div class="container-fluid">
       <h1>${ title }</h1>
       %if "description" in context.keys():
