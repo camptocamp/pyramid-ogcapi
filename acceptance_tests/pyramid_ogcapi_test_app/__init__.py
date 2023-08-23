@@ -2,7 +2,7 @@
 An example application for testing.
 """
 
-from typing import Any, Dict
+from typing import Any
 
 import c2cwsgiutils.pyramid
 import sqlalchemy
@@ -12,7 +12,7 @@ from pyramid.config import Configurator
 import pyramid_ogcapi_test_app.ogcapi
 
 
-def main(_: Any, **settings: Dict[str, Any]) -> Any:
+def main(_: Any, **settings: dict[str, Any]) -> Any:
     """Create a Pyramid WSGI application."""
 
     config = Configurator(settings=settings)
