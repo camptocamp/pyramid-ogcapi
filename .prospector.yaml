@@ -1,4 +1,5 @@
----
+inherits:
+  - duplicated
 strictness: veryhigh
 max-line-length: 110
 doc-warnings: true
@@ -9,14 +10,12 @@ ignore-paths:
 
 pylint:
   disable:
-    - wrong-import-order # done by isort
     - line-too-long # done by black
     - missing-timeout # done globally by c2cwsgiutils
     - too-many-arguments
 
 pycodestyle:
   disable:
-    - E203 # Whitespace before ':'
     - E722 # Do not use bare 'except'
     - E501 # Line too long
 
