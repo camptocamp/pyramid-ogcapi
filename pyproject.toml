@@ -1,6 +1,6 @@
 [tool.black]
 line-length = 110
-target-version = ['py38']
+target-version = ["py39"]
 
 [tool.isort]
 profile = "black"
@@ -8,7 +8,7 @@ line_length = 110
 known_first_party = "pyramid_ogcapi"
 
 [tool.mypy]
-python_version = 3.8
+python_version = 3.9
 warn_redundant_casts = true
 warn_unused_ignores = true
 ignore_missing_imports = true
@@ -30,15 +30,13 @@ classifiers = [
     "Environment :: Web Environment",
     "Operating System :: OS Independent",
     "Programming Language :: Python",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: BSD License",
     "Typing :: Typed",
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.8,<4"
+python = ">=3.9,<4"
 pyramid-openapi3 = "0.16.0"
 c2cwsgiutils = { version = "5.2.2", optional = true, extras = ["all"] }
 pyramid-mako = "1.1.0"

@@ -3,7 +3,7 @@ Automatically generated file from a JSON schema.
 """
 
 
-from typing import Any, List, Literal, TypedDict, Union
+from typing import Any, Literal, TypedDict, Union
 
 from typing_extensions import Required
 
@@ -62,7 +62,7 @@ class CollectionsCollectionidGetResponse200(TypedDict, total=False):
     example: An address.
     """
 
-    links: Required[List["_Collectionscollectionidgetresponse200LinksItem"]]
+    links: Required[list["_Collectionscollectionidgetresponse200LinksItem"]]
     """ Required property """
 
     extent: "_Collectionscollectionidgetresponse200Extent"
@@ -73,7 +73,7 @@ class CollectionsCollectionidGetResponse200(TypedDict, total=False):
     default: feature
     """
 
-    crs: List[str]
+    crs: list[str]
     """
     the list of coordinate reference systems supported by the service
 
@@ -170,7 +170,7 @@ class CollectionsCollectionidItemsGetQuery(TypedDict, total=False):
     """
 
     limit: "CollectionsCollectionidItemsGetQueryLimit"
-    bbox: List[Union[int, float]]
+    bbox: list[Union[int, float]]
     datetime: str
 
 
@@ -219,10 +219,10 @@ CollectionsGetResponse = Union["CollectionsGetResponse200", "CollectionsGetRespo
 
 
 class CollectionsGetResponse200(TypedDict, total=False):
-    links: Required[List["_ComponentsSchemasLink"]]
+    links: Required[list["_ComponentsSchemasLink"]]
     """ Required property """
 
-    collections: Required[List["_ComponentsSchemasCollection"]]
+    collections: Required[list["_ComponentsSchemasCollection"]]
     """ Required property """
 
 
@@ -249,7 +249,7 @@ ConformanceGetResponse = Union["ConformanceGetResponse200", "ConformanceGetRespo
 
 
 class ConformanceGetResponse200(TypedDict, total=False):
-    conformsTo: Required[List[str]]
+    conformsTo: Required[list[str]]
     """ Required property """
 
 
@@ -282,7 +282,7 @@ class GetResponse200(TypedDict, total=False):
     description: str
     """ example: Access to data about buildings in the city of Bonn via a Web API that conforms to the OGC API Features specification. """
 
-    links: Required[List["_ComponentsSchemasLink"]]
+    links: Required[list["_ComponentsSchemasLink"]]
     """ Required property """
 
 
@@ -349,7 +349,7 @@ class _Collectionscollectionidgetresponse200Extent(TypedDict, total=False):
 class _Collectionscollectionidgetresponse200ExtentSpatial(TypedDict, total=False):
     """The spatial extent of the features in the collection."""
 
-    bbox: List["_Collectionscollectionidgetresponse200ExtentSpatialBboxItem"]
+    bbox: list["_Collectionscollectionidgetresponse200ExtentSpatialBboxItem"]
     """
     One or more bounding boxes that describe the spatial extent of the dataset.
     In the Core only a single bounding box is supported. Extensions may support
@@ -362,7 +362,7 @@ class _Collectionscollectionidgetresponse200ExtentSpatial(TypedDict, total=False
     crs: "_Collectionscollectionidgetresponse200ExtentSpatialCrs"
 
 
-_Collectionscollectionidgetresponse200ExtentSpatialBboxItem = List[Union[int, float]]
+_Collectionscollectionidgetresponse200ExtentSpatialBboxItem = list[Union[int, float]]
 """
 Each bounding box is provided as four or six numbers, depending on
 whether the coordinate reference system includes a vertical axis
@@ -414,7 +414,7 @@ _COLLECTIONSCOLLECTIONIDGETRESPONSE200EXTENTSPATIALCRS_HTTP_COLON__SOLIDUS__SOLI
 class _Collectionscollectionidgetresponse200ExtentTemporal(TypedDict, total=False):
     """The temporal extent of the features in the collection."""
 
-    interval: List["_Collectionscollectionidgetresponse200ExtentTemporalIntervalItem"]
+    interval: list["_Collectionscollectionidgetresponse200ExtentTemporalIntervalItem"]
     """
     One or more time intervals that describe the temporal extent of the dataset.
     The value `null` is supported and indicates an unbounded interval end.
@@ -428,7 +428,7 @@ class _Collectionscollectionidgetresponse200ExtentTemporal(TypedDict, total=Fals
     trs: "_Collectionscollectionidgetresponse200ExtentTemporalTrs"
 
 
-_Collectionscollectionidgetresponse200ExtentTemporalIntervalItem = List[
+_Collectionscollectionidgetresponse200ExtentTemporalIntervalItem = list[
     "_Collectionscollectionidgetresponse200ExtentTemporalIntervalItemItem"
 ]
 """
@@ -494,7 +494,7 @@ class _ComponentsSchemasCollection(TypedDict, total=False):
     example: An address.
     """
 
-    links: Required[List["_ComponentsSchemasLink"]]
+    links: Required[list["_ComponentsSchemasLink"]]
     """ Required property """
 
     extent: "_ComponentsSchemasExtent"
@@ -505,7 +505,7 @@ class _ComponentsSchemasCollection(TypedDict, total=False):
     default: feature
     """
 
-    crs: List[str]
+    crs: list[str]
     """
     the list of coordinate reference systems supported by the service
 
@@ -528,7 +528,7 @@ class _ComponentsSchemasExtent(TypedDict, total=False):
 class _ComponentsSchemasExtentSpatial(TypedDict, total=False):
     """The spatial extent of the features in the collection."""
 
-    bbox: List["_ComponentsSchemasExtentSpatialBboxItem"]
+    bbox: list["_ComponentsSchemasExtentSpatialBboxItem"]
     """
     One or more bounding boxes that describe the spatial extent of the dataset.
     In the Core only a single bounding box is supported. Extensions may support
@@ -541,7 +541,7 @@ class _ComponentsSchemasExtentSpatial(TypedDict, total=False):
     crs: "_ComponentsSchemasExtentSpatialCrs"
 
 
-_ComponentsSchemasExtentSpatialBboxItem = List[Union[int, float]]
+_ComponentsSchemasExtentSpatialBboxItem = list[Union[int, float]]
 """
 Each bounding box is provided as four or six numbers, depending on
 whether the coordinate reference system includes a vertical axis
@@ -591,7 +591,7 @@ _COMPONENTSSCHEMASEXTENTSPATIALCRS_HTTP_COLON__SOLIDUS__SOLIDUS_WWW_FULL_STOP_OP
 class _ComponentsSchemasExtentTemporal(TypedDict, total=False):
     """The temporal extent of the features in the collection."""
 
-    interval: List["_ComponentsSchemasExtentTemporalIntervalItem"]
+    interval: list["_ComponentsSchemasExtentTemporalIntervalItem"]
     """
     One or more time intervals that describe the temporal extent of the dataset.
     The value `null` is supported and indicates an unbounded interval end.
@@ -605,7 +605,7 @@ class _ComponentsSchemasExtentTemporal(TypedDict, total=False):
     trs: "_ComponentsSchemasExtentTemporalTrs"
 
 
-_ComponentsSchemasExtentTemporalIntervalItem = List["_ComponentsSchemasExtentTemporalIntervalItemItem"]
+_ComponentsSchemasExtentTemporalIntervalItem = list["_ComponentsSchemasExtentTemporalIntervalItemItem"]
 """
 Begin and end times of the time interval. The timestamps are in the
 temporal coordinate reference system specified in `trs`. By default

@@ -2,7 +2,7 @@
 
 import json
 import logging
-from typing import Any, Callable, Dict, List, Optional, cast
+from typing import Any, Callable, Optional, cast
 
 import pyramid.config
 import pyramid.request
@@ -37,7 +37,7 @@ class _OgcType:
 
 
 def _get_view(
-    views: Any, method_config: Any, route_name: str, path: str, helps: List[str], with_help: bool = True
+    views: Any, method_config: Any, route_name: str, path: str, helps: list[str], with_help: bool = True
 ) -> Optional[Callable[[pyramid.request.Request], Any]]:
     content = method_config.get("responses", {}).get("200", {}).get("content", {})
     json_content = content.get("application/json", {}) or content.get("application/geo+json", {})
@@ -71,7 +71,7 @@ def register_routes(
     views: Any,
     apiname: str = "pyramid_openapi3",
     route_prefix: Optional[str] = None,
-    path_template: Optional[Dict[str, str]] = None,
+    path_template: Optional[dict[str, str]] = None,
     json_renderer: str = "json",
 ) -> None:
     """
@@ -90,7 +90,7 @@ def register_routes(
         config.add_route_predicate("ogc_type", _OgcType)
 
         spec = config.registry.settings[apiname]["spec"]
-        helps: List[str] = []
+        helps: list[str] = []
         for pattern, path_config in spec.get("paths", {}).items():
             route_name = ("" if route_prefix is None else route_prefix) + cast(
                 str,
@@ -185,7 +185,7 @@ def typed_request(
     """
 
     def wrapper(obj: Any, request: pyramid.request.Request) -> Any:
-        _typed_request: Dict[str, Any] = {}
+        _typed_request: dict[str, Any] = {}
         try:
             _typed_request["request_body"] = request.json_body
         except json.JSONDecodeError:
