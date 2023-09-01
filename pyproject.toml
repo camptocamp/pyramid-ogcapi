@@ -38,7 +38,7 @@ classifiers = [
 [tool.poetry.dependencies]
 python = ">=3.9,<4"
 pyramid-openapi3 = "0.16.0"
-c2cwsgiutils = { version = "5.2.2", optional = true, extras = ["all"] }
+c2cwsgiutils = { version = "5.2.3", optional = true, extras = ["all"] }
 pyramid-mako = "1.1.0"
 openapi-core = "0.16.6"
 
