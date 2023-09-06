@@ -2,6 +2,7 @@ FROM ghcr.io/osgeo/gdal:ubuntu-small-3.6.4 as base-all
 LABEL maintainer Camptocamp "info@camptocamp.com"
 SHELL ["/bin/bash", "-o", "pipefail", "-cux"]
 
+# hadolint ignore=DL3008
 RUN --mount=type=cache,target=/var/lib/apt/lists \
     --mount=type=cache,target=/var/cache,sharing=locked \
     --mount=type=cache,target=/root/.cache \
@@ -15,6 +16,7 @@ FROM base-all as poetry
 # Install Poetry
 WORKDIR /poetry
 COPY requirements.txt ./
+# hadolint ignore=DL3042
 RUN --mount=type=cache,target=/root/.cache \
     python3 -m pip install --disable-pip-version-check --requirement=requirements.txt
 
@@ -28,6 +30,7 @@ FROM base-all as run
 
 WORKDIR /app
 
+# hadolint ignore=DL3042
 RUN --mount=type=cache,target=/root/.cache \
     --mount=type=bind,from=poetry,source=/poetry,target=/poetry \
     python3 -m pip install --disable-pip-version-check --no-deps --requirement=/poetry/requirements.txt \
@@ -36,12 +39,16 @@ RUN --mount=type=cache,target=/root/.cache \
 WORKDIR /opt/pyramid_ogcapi
 COPY pyramid_ogcapi ./pyramid_ogcapi
 COPY pyproject.toml README.md ./
-RUN pip install --disable-pip-version-check --no-deps .
+# hadolint ignore=DL3042
+RUN --mount=type=cache,target=/root/.cache \
+  pip install --disable-pip-version-check --no-deps .
 
 WORKDIR /app
 COPY acceptance_tests/pyramid_ogcapi_test_app ./pyramid_ogcapi_test_app
 COPY acceptance_tests/pyproject.toml ./
-RUN pip install --disable-pip-version-check --no-deps --editable=. \
+# hadolint ignore=DL3042
+RUN --mount=type=cache,target=/root/.cache \
+  pip install --disable-pip-version-check --no-deps --editable=. \
   && python3 -m compileall -q .
 
 COPY acceptance_tests/tests ./tests

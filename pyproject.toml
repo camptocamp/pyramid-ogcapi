@@ -36,23 +36,21 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.9,<4"
+python = ">=3.9,<3.12"
 pyramid-openapi3 = "0.16.0"
-c2cwsgiutils = { version = "5.2.3", optional = true, extras = ["all"] }
+c2cwsgiutils = { version = "5.2.3", optional = true, extras = ["standard", "oauth2"] }
 pyramid-mako = "1.1.0"
-openapi-core = "0.18.0"
+openapi-core = "0.16.6"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 prospector = { extras = ["with_mypy", "with_bandit", "with_pyroma"], version = "1.10.2" }
+prospector-profile-duplicated = "0.3.0"
 pytest = "7.4.0"
 pytest-cov = "4.1.0"
 WebTest = "3.0.0"
 
 [tool.poetry.extras]
 application = ["c2cwsgiutils"]
-
-[tool.poetry.group.dev.dependencies]
-prospector-profile-duplicated = "0.3.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning", "poetry-plugin-tweak-dependencies-version"]
