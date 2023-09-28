@@ -22,3 +22,5 @@ services:
     environment:
       - C2C_REDIS_URL=redis://redis:6379/0
       - SQLALCHEMY_URL=postgresql://postgres:postgres@db:5432/tests
+    volumes:
+      - ./results:/app/results

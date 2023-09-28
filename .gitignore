@@ -7,3 +7,4 @@ __pycache__
 /dist
 /.github/changelog-generator-cache
 /docker-compose.override.yaml
+/results
