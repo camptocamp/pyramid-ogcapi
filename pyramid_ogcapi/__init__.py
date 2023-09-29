@@ -66,11 +66,19 @@ def _get_view(
     return None
 
 
+def path2route_name_prefix(path: str, route_prefix: str = "") -> str:
+    return route_prefix + (
+        "landing_page"
+        if path == "/"
+        else path.lstrip("/").replace("/", "_").replace("{", "").replace("}", "").replace("-", "_")
+    )
+
+
 def register_routes(
     config: pyramid.config.Configurator,
     views: Any,
     apiname: str = "pyramid_openapi3",
-    route_prefix: Optional[str] = None,
+    route_prefix: str = "",
     path_template: Optional[dict[str, str]] = None,
     json_renderer: str = "json",
 ) -> None:
@@ -92,16 +100,7 @@ def register_routes(
         spec = config.registry.settings[apiname]["spec"]
         helps: list[str] = []
         for pattern, path_config in spec.get("paths", {}).items():
-            route_name = ("" if route_prefix is None else route_prefix) + cast(
-                str,
-                "landing_page"
-                if pattern == "/"
-                else pattern.lstrip("/")
-                .replace("/", "_")
-                .replace("{", "")
-                .replace("}", "")
-                .replace("-", "_"),
-            )
+            route_name = path2route_name_prefix(pattern, route_prefix)
 
             for method, method_config in path_config.items():
                 content = method_config.get("responses", {}).get("200", {}).get("content", {})
