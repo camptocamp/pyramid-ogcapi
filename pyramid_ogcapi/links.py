@@ -6,6 +6,7 @@ import logging
 from typing import Optional
 
 import pyramid.request
+
 import pyramid_ogcapi
 
 _LOG = logging.getLogger(__name__)
@@ -38,8 +39,8 @@ def sub_links(request: pyramid.request.Request, api_name: str, route_prefix: str
             break
 
     sub_paths = []
-    for path in spec["paths"]:
-        if path != "/" and path.startswith(current_path + "/") and "{" not in path:
+    for path, config in spec["paths"].items():
+        if path != "/" and path.startswith(current_path + "/") and "{" not in path and "get" in config:
             extra_path = path[len(current_path) + 1 :]
             if "/" not in extra_path:
                 sub_paths.append(path)
@@ -63,9 +64,18 @@ def link(
     spec = request.registry.settings[api_name]["spec"]
     route_name_prefix = pyramid_ogcapi.path2route_name_prefix(path, route_prefix)
     route_name = route_name_prefix + ("_json" if json else "_html")
+    path_config = spec["paths"][path]
+
+    used_mime_type = "application/json" if json else "text/html"
+    if json:
+        for mime_type in path_config["get"]["responses"].get("200", {}).get("content", {}):
+            if "json" in mime_type:
+                used_mime_type = mime_type
+                break
+
     return {
         "href": request.route_url(route_name),
         "rel": relation_type or route_name_prefix,
-        "type": "application/json" if json else "text/html",
-        "title": spec["paths"][path]["get"]["summary"],
+        "type": used_mime_type,
+        "title": path_config["get"]["summary"],
     }

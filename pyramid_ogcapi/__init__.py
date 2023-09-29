@@ -98,6 +98,34 @@ def register_routes(
         config.add_route_predicate("ogc_type", _OgcType)
 
         spec = config.registry.settings[apiname]["spec"]
+
+        # Resolve the $ref
+        def resolve_ref(obj: Any, spec: dict[str, Any], path) -> None:
+            if len(path) > 100:
+                _LOG.debug("Abort recursive path: %s", ", ".join(path))
+                return
+            if isinstance(obj, dict):
+                if "$ref" in obj:
+                    ref = obj["$ref"]
+                    if ref.startswith("#/"):
+                        ref = ref[2:]
+                    else:
+                        raise NotImplementedError(f"Only local reference are supported: {ref}")
+                    ref_split = ref.split("/")
+                    new_obj = spec
+                    for ref_part in ref_split:
+                        new_obj = new_obj[ref_part]
+                    del obj["$ref"]
+                    obj.update(new_obj)
+
+                for key, val in obj.items():
+                    resolve_ref(val, spec, [*path, key])
+            elif isinstance(obj, list):
+                for val in obj:
+                    resolve_ref(val, spec, [*path, "[]"])
+
+        resolve_ref(spec["paths"], spec, [])
+
         helps: list[str] = []
         for pattern, path_config in spec.get("paths", {}).items():
             route_name = path2route_name_prefix(pattern, route_prefix)
