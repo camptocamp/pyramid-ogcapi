@@ -24,7 +24,9 @@
         crossorigin="anonymous"
         referrerpolicy="no-referrer"
     />
-    <title>${ title }</title>
+    %if "title" in context.keys():
+    <title>${ title  }</title>
+    %endif
     %if "description" in context.keys():
     <meta name="description" content="${ description }">
     %endif
@@ -39,7 +41,9 @@
       })()
     </script>
     <div class="container-fluid">
+      %if "title" in context.keys():
       <h1>${ title }</h1>
+      %endif
       %if "description" in context.keys():
       <p>${ description }</p>
       %endif
