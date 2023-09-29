@@ -41,8 +41,8 @@ def test_api(test_app, accept, f_param, expected):
     "path,width,height,expected",
     [
         ("", 500, 500, "ogcapi"),
-        ("conformance", 800, 150, "conformance"),
-        ("collections", 550, 700, "collections"),
+        ("conformance", 800, 300, "conformance"),
+        ("collections", 550, 750, "collections"),
     ],
 )
 @pytest.mark.parametrize("prefers_color_scheme", ["light", "dark"])

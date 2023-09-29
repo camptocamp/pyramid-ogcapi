@@ -218,6 +218,7 @@ def register_routes(
         resolve_ref(spec["paths"], spec, [])
 
         helps: list[str] = []
+        view_path = config.registry.settings.setdefault("pyramid_ogcapi", {}).setdefault("view_path", {})
         for pattern, path_config in spec.get("paths", {}).items():
             route_name = path2route_name_prefix(pattern, route_prefix)
 
@@ -242,6 +243,7 @@ def register_routes(
                         renderer=path_template.get(pattern, "pyramid_ogcapi:templates/default.mako"),
                         openapi=True,
                     )
+                    view_path[f"{route_name}_html"] = path_config
                     config.add_route(
                         f"{route_name}_json",
                         pattern,
@@ -254,6 +256,7 @@ def register_routes(
                         renderer=json_renderer,
                         openapi=True,
                     )
+                    view_path[f"{route_name}_json"] = path_config
 
                 method_route_name = f"{route_name}_{method}" if method != "get" else route_name
 

@@ -1,3 +1,18 @@
+<%
+import logging
+_LOGGER = logging.getLogger(__name__)
+
+path_spec = request.registry.settings.get("pyramid_ogcapi", {}).get("view_path", {}).get(request.matched_route.name)
+path_spec_get = path_spec.get('get', {})
+
+title_ = context['title'] if "title" in context.keys() else ''
+if not title_ and 'summary' in path_spec_get:
+    title_ = path_spec_get['summary']
+
+description_ = context['description'] if "description" in context.keys() else ''
+if not description_ and 'description' in path_spec_get:
+    description_ = path_spec_get['description']
+%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -24,11 +39,11 @@
         crossorigin="anonymous"
         referrerpolicy="no-referrer"
     />
-    %if "title" in context.keys():
-    <title>${ title  }</title>
+    %if title_:
+    <title>${ title_ }</title>
     %endif
-    %if "description" in context.keys():
-    <meta name="description" content="${ description }">
+    %if description_:
+    <meta name="description" content="${ description_ }">
     %endif
     <style>
       th {
@@ -51,11 +66,11 @@
       })()
     </script>
     <div class="container-fluid">
-      %if "title" in context.keys():
-      <h1>${ title }</h1>
+      %if title_:
+      <h1>${ title_ }</h1>
       %endif
-      %if "description" in context.keys():
-      <p>${ description }</p>
+      %if description_:
+      <p>${ description_ }</p>
       %endif
 
       <%
