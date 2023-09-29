@@ -35,8 +35,8 @@
         vertical-align: top;
       }
       table {
-        border: solid 1px lightgray;
-        border-radius: .25rem;
+        border: var(--bs-border-width) solid var(--bs-border-color);
+        border-radius: var(--bs-border-radius);
         border-collapse: inherit;
       }
     </style>
