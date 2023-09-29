@@ -21,11 +21,6 @@ info:
     url: http://www.opengeospatial.org/legal/
   x-logo:
     url: 'https://www.ogc.org/pub/www/files/OGC_Logo_2D_Blue_x_0_0.png'
-servers:
-  - url: http://localhost/ogcapi
-    description: Example OGC API server
-  - url: http://localhost:9123/ogcapi
-    description: Example OGC API server
 tags:
   - name: Capabilities
     description: |-

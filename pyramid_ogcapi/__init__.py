@@ -6,6 +6,12 @@ from typing import Any, Callable, Optional, cast
 
 import pyramid.config
 import pyramid.request
+import pyramid.response
+import pyramid_openapi3
+import yaml
+from openapi_core.spec import Spec
+from pyramid.security import NO_PERMISSION_REQUIRED
+from pyramid.threadlocal import get_current_request
 
 _LOG = logging.getLogger(__name__)
 
@@ -14,6 +20,7 @@ def includeme(config: pyramid.config.Configurator) -> None:
     """Include the OGC API extension."""
     config.include("pyramid_openapi3")
     config.add_directive("pyramid_ogcapi_register_routes", register_routes)
+    config.add_route("pyramid_ogcapi.spec", "/openapi.yaml")
 
 
 class _OgcType:
@@ -74,6 +81,61 @@ def path2route_name_prefix(path: str, route_prefix: str = "") -> str:
     )
 
 
+class _SpecProxy:
+    """
+    Proxy used to generate a spec with the correct servers.
+    """
+
+    def __init__(self, spec: dict[str, Any], settings: dict[str, Any]) -> None:
+        self._spec = spec
+        self._settings = settings
+
+    def keys(self) -> list[str]:
+        """Return the keys of the mapping object."""
+
+        return self._spec.keys()
+
+    def values(self) -> list[Any]:
+        """Return the values of the mapping object."""
+
+        return self._spec.values()
+
+    def items(self) -> list[tuple[str, Any]]:
+        """Return the items of the mapping object."""
+
+        return self._spec.items()
+
+    def get(self, key: str, default: Any = None) -> Any:
+        """Return the value for key if key is in the dictionary, else default."""
+
+        if key == "servers":
+            request = get_current_request()
+            return [
+                {
+                    "url": f"http://localhost/{p.rstrip('/')}"
+                    if request is None
+                    else request.route_url("landing_page_html")
+                }
+                for p in self._settings.get("pyramid_ogcapi", {}).get("route_prefix", [])
+            ]
+
+        return self._spec.get(key, default)
+
+    def __getitem__(self, key) -> Any:
+        if key == "servers":
+            self.get(key)
+        return self._spec[key]
+
+    def __contains__(self, key) -> bool:
+        return key in self._spec
+
+    def __len__(self) -> int:
+        return len(self._spec)
+
+    def __truediv__(self, other) -> Any:
+        return self._spec / other
+
+
 def register_routes(
     config: pyramid.config.Configurator,
     views: Any,
@@ -81,6 +143,9 @@ def register_routes(
     route_prefix: str = "",
     path_template: Optional[dict[str, str]] = None,
     json_renderer: str = "json",
+    spec_route_name: str = "pyramid_ogcapi.spec",
+    spec_route: str = "/ogcapi.yaml",
+    spec_permission: str = NO_PERMISSION_REQUIRED,
 ) -> None:
     """
     Register routes of an OSC API application.
@@ -92,8 +157,34 @@ def register_routes(
     if path_template is None:
         path_template = {}
 
+    config.registry.settings.setdefault("pyramid_ogcapi", {}).setdefault("route_prefix", []).append(
+        config.route_prefix
+    )
+
     def action() -> None:
         assert path_template is not None
+
+        settings = config.registry.settings
+        settings[apiname]["spec"] = _SpecProxy(settings[apiname]["spec"], settings)
+
+        # Add the spec view
+        def spec_view(request: pyramid.request.Request) -> pyramid.response.Response:
+            with open(config.registry.settings[apiname]["filepath"], encoding="utf-8") as f:
+                spec = yaml.load(f, Loader=yaml.SafeLoader)
+                if "servers" not in spec:
+                    spec["servers"] = [
+                        {
+                            "url": request.route_url("landing_page_html"),
+                        }
+                    ]
+                request.response.text = yaml.dump(spec, Dumper=yaml.SafeDumper)
+            return request.response
+
+        assert spec_route_name != config.registry.settings[apiname]["spec_route_name"]
+        config.registry.settings[apiname]["spec_route_name"] = spec_route_name
+        config.add_route(spec_route_name, spec_route)
+        config.add_view(route_name=spec_route_name, permission=spec_permission, view=spec_view)
+        ###
 
         config.add_route_predicate("ogc_type", _OgcType)
 
