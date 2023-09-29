@@ -82,16 +82,11 @@ class _Views:
         """
         Get the result for the path: '/collections'.
         """
-        del pyramid_request, request  # Unused
+        del request  # Unused
 
         return {
             "links": [
-                {
-                    "href": "http://data.example.org/collections.json",
-                    "rel": "self",
-                    "type": "application/json",
-                    "title": "this document",
-                },
+                links.self_link(pyramid_request),
                 {
                     "href": "http://data.example.org/collections.html",
                     "rel": "alternate",
@@ -167,12 +162,7 @@ class _Views:
                 "temporal": {"interval": [["2010-02-15T12:34:56Z", None]]},
             },
             "links": [
-                {
-                    "href": "http://data.example.org/collections/buildings/items",
-                    "rel": "items",
-                    "type": "application/geo+json",
-                    "title": "Buildings",
-                },
+                links.self_link(pyramid_request),
                 {
                     "href": "http://data.example.org/collections/buildings/items.html",
                     "rel": "items",
