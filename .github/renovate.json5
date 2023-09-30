@@ -10,7 +10,7 @@
   baseBranches: ['0.1', 'master'],
   'pre-commit': { enabled: true },
   html: {
-    fileMatch: ['\\.html?$', '\\.html?.mako$'],
+    fileMatch: ['\\.html?$', '\\.mako$'],
   },
   lockFileMaintenance: {
     enabled: true,
