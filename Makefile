@@ -27,4 +27,4 @@ tests:
 .PHONY: acceptance-tests
 acceptance-tests: ## Run the acceptance tests
 acceptance-tests: run
-	docker-compose exec -T application pytest -v
+	docker-compose exec -T application pytest -vv
