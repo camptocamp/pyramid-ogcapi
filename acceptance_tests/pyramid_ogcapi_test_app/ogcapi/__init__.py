@@ -6,6 +6,7 @@ from typing import Any
 
 import pyramid.config
 import pyramid.request
+
 import pyramid_ogcapi
 from pyramid_ogcapi import links
 
