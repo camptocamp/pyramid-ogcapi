@@ -6,6 +6,7 @@ from typing import Any
 
 import pyramid.config
 import pyramid.request
+
 import pyramid_ogcapi
 from pyramid_ogcapi import links
 
@@ -40,7 +41,7 @@ class _Views:
             "title": "Buildings in Bonn",
             "description": "Access to data about buildings in the city of Bonn via a Web API that conforms to the OGC API Features specification.",
             "links": [
-                links.self_link(pyramid_request, "this document"),
+                links.self_link(pyramid_request),
                 {
                     "href": "http://data.example.org/api",
                     "rel": "service-desc",
@@ -53,8 +54,7 @@ class _Views:
                     "type": "text/html",
                     "title": "the API documentation",
                 },
-                links.link(pyramid_request, self.api_name, path="/conformance", relation_type="conformance"),
-                links.link(pyramid_request, self.api_name, path="/collections", relation_type="data"),
+                *links.sub_links(pyramid_request, self.api_name),
             ],
         }
 

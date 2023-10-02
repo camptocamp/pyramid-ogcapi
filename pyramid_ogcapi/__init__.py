@@ -66,11 +66,19 @@ def _get_view(
     return None
 
 
+def path2route_name_prefix(path: str, route_prefix: str = "") -> str:
+    return route_prefix + (
+        "landing_page"
+        if path == "/"
+        else path.lstrip("/").replace("/", "_").replace("{", "").replace("}", "").replace("-", "_")
+    )
+
+
 def register_routes(
     config: pyramid.config.Configurator,
     views: Any,
     apiname: str = "pyramid_openapi3",
-    route_prefix: Optional[str] = None,
+    route_prefix: str = "",
     path_template: Optional[dict[str, str]] = None,
     json_renderer: str = "json",
 ) -> None:
@@ -90,18 +98,37 @@ def register_routes(
         config.add_route_predicate("ogc_type", _OgcType)
 
         spec = config.registry.settings[apiname]["spec"]
+
+        # Resolve the $ref
+        def resolve_ref(obj: Any, spec: dict[str, Any], path) -> None:
+            if len(path) > 100:
+                _LOG.debug("Abort recursive path: %s", ", ".join(path))
+                return
+            if isinstance(obj, dict):
+                if "$ref" in obj:
+                    ref = obj["$ref"]
+                    if ref.startswith("#/"):
+                        ref = ref[2:]
+                    else:
+                        raise NotImplementedError(f"Only local reference are supported: {ref}")
+                    ref_split = ref.split("/")
+                    new_obj = spec
+                    for ref_part in ref_split:
+                        new_obj = new_obj[ref_part]
+                    del obj["$ref"]
+                    obj.update(new_obj)
+
+                for key, val in obj.items():
+                    resolve_ref(val, spec, [*path, key])
+            elif isinstance(obj, list):
+                for val in obj:
+                    resolve_ref(val, spec, [*path, "[]"])
+
+        resolve_ref(spec["paths"], spec, [])
+
         helps: list[str] = []
         for pattern, path_config in spec.get("paths", {}).items():
-            route_name = ("" if route_prefix is None else route_prefix) + cast(
-                str,
-                "landing_page"
-                if pattern == "/"
-                else pattern.lstrip("/")
-                .replace("/", "_")
-                .replace("{", "")
-                .replace("}", "")
-                .replace("-", "_"),
-            )
+            route_name = path2route_name_prefix(pattern, route_prefix)
 
             for method, method_config in path_config.items():
                 content = method_config.get("responses", {}).get("200", {}).get("content", {})
