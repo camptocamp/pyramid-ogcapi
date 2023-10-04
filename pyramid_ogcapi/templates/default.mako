@@ -30,6 +30,16 @@
     %if "description" in context.keys():
     <meta name="description" content="${ description }">
     %endif
+    <style>
+      th {
+        vertical-align: top;
+      }
+      table {
+        border: solid 1px lightgray;
+        border-radius: .25rem;
+        border-collapse: inherit;
+      }
+    </style>
   </head>
   <body>
     <script>
@@ -48,17 +58,55 @@
       <p>${ description }</p>
       %endif
 
-      %for k in context.keys():
+      <%
+      from pyramid_ogcapi.json2html import convert
+      %>
+
+      <%
+      values = {}
+      for k in context.keys():
+          v = context[k]
+          if k not in ("renderer_name", "caller", "title", "description", "links", "collections") and isinstance(v, (str, int, float, bool, list, dict)):
+              values[k] = v
+
+      html_values = convert(values)
+      %>
+      ${ html_values | n }
+
+      %if "collections" in context.keys():
+      <h2>Collections</h2>
+      %for collection in collections:
+        %if "title" in collection.keys():
+        <h3>${ collection["title"] }</h3>
+        %endif
+        %if "description" in collection.keys():
+        <p>${ collection["description"] }</p>
+        %endif
         <%
-        v = context[k]
+        values = {}
+        for k, v in collection.items():
+            if k not in ("title", "description", "links"):
+                values[k] = v
+
+        html_values = convert(values, ["bbox", "interval"])
         %>
-        %if k not in ("renderer_name", "caller", "title", "description", "links") and isinstance(v, (str, int, float, bool, list, dict)):
-          <p><strong>${ k }</strong>: ${ v }</p>
+        ${ html_values | n }
+
+        %if "links" in collection and collection["links"]:
+        <h4>Links</h4>
+        <ul class="list-group">
+            %for link in collection["links"]:
+            <li class="list-group-item">
+                <a href="${ link["href"] }">${ link["title"] }</a>
+            </li>
+            %endfor
+        </ul>
         %endif
       %endfor
+      %endif
 
       %if "links" in context.keys() and links:
-      <h3>Links</h3>
+      <h2>Links</h2>
       <ul class="list-group">
         %for link in links:
           <li class="list-group-item">
