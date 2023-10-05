@@ -37,23 +37,38 @@ def test_api(test_app, accept, f_param, expected):
     assert response.headers["Content-Type"] == expected
 
 
-# Not working because we can't set the Host header to localhost:9123
-# def test_ogcapi():
-#    image.check_screenshot(
-#        "http://localhost:8080/ogcapi/",
-#        headers={"Accept": "text/html", "Host": "localhost:9123"},
-#        width=500,
-#        height=500,
-#        result_folder="results",
-#        expected_filename=os.path.join(os.path.dirname(__file__), "ogcapi.expected.png"),
-#    )
+@pytest.mark.parametrize(
+    "path,width,height,expected",
+    [
+        ("", 500, 500, "ogcapi"),
+        ("conformance", 800, 150, "conformance"),
+        ("collections", 550, 700, "collections"),
+    ],
+)
+@pytest.mark.parametrize("prefers_color_scheme", ["light", "dark"])
+def test_ogcapi(path, width, height, prefers_color_scheme, expected):
+    image.check_screenshot(
+        f"http://localhost:8080/ogcapi/{path}",
+        media=[
+            {"name": "prefers-color-scheme", "value": prefers_color_scheme},
+        ],
+        headers={"Accept": "text/html"},
+        width=width,
+        height=height,
+        result_folder="results",
+        expected_filename=os.path.join(
+            os.path.dirname(__file__), f"{expected}-{prefers_color_scheme}.expected.png"
+        ),
+    )
 
 
 def test_docs():
+    """Test the swagger page"""
     image.check_screenshot(
         "http://localhost:8080/ogcapi/docs/",
         width=900,
         height=900,
+        sleep=1000,
         result_folder="results",
         expected_filename=os.path.join(os.path.dirname(__file__), "docs.expected.png"),
     )
