@@ -38,7 +38,7 @@ repos:
       - id: trailing-whitespace
       - id: mixed-line-ending
   - repo: https://github.com/sbrunner/hooks
-    rev: 0.5.0
+    rev: 0.7.0
     hooks:
       - id: copyright
         exclude: |-
@@ -102,14 +102,14 @@ repos:
     hooks:
       - id: autoflake
   - repo: https://github.com/PyCQA/isort
-    rev: 5.12.0
+    rev: 5.13.2
     hooks:
       - id: isort
         args:
           - -p
           - pyramid_ogcapi
   - repo: https://github.com/psf/black
-    rev: 23.11.0
+    rev: 23.12.1
     hooks:
       - id: black
   - repo: https://github.com/PyCQA/prospector
@@ -123,7 +123,7 @@ repos:
         exclude: |-
           ^acceptance_tests/pyramid_ogcapi_test_app/ogcapi_features.py$
         additional_dependencies:
-          - prospector-profile-duplicated==0.4.0 # pypi
+          - prospector-profile-duplicated==0.5.1 # pypi
   - repo: https://github.com/sbrunner/jsonschema-validator
     rev: 0.1.0
     hooks:
