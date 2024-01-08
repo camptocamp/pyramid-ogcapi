@@ -44,7 +44,7 @@ openapi-core = "0.16.6"
 
 [tool.poetry.group.dev.dependencies]
 prospector = { extras = ["with_mypy", "with_bandit", "with_pyroma"], version = "1.10.3" }
-prospector-profile-duplicated = "0.4.0"
+prospector-profile-duplicated = "0.5.1"
 pytest = "7.4.3"
 pytest-cov = "4.1.0"
 WebTest = "3.0.0"
