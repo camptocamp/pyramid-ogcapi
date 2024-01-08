@@ -51,7 +51,7 @@ jobs:
 
       - run: make tests
       - run: make acceptance-tests
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: Acceptance tests
           path: results
