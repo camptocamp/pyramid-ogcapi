@@ -43,6 +43,7 @@ pyramid-mako = "1.1.0"
 openapi-core = "0.16.6"
 urllib3 = "2.0.7"
 werkzeug = "3.0.1"
+pillow = "10.2.0"
 
 [tool.poetry.group.dev.dependencies]
 prospector = { extras = ["with_mypy", "with_bandit", "with_pyroma"], version = "1.10.3" }
