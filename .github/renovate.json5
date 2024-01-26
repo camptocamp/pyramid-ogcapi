@@ -86,15 +86,18 @@
       matchPackageNames: ['node'],
       enabled: false,
     },
-    /** Auto merge the GitHub action and pre-commit updates */
-    {
-      matchDatasources: ['github-actions', 'pre-commit'],
-      automerge: true,
-    },
     /** Auto merge updates on CI files */
     {
       matchPaths: ['^\\.pre-commit-config\\.yaml$', '^\\.github/.*', '^ci/.*'],
       automerge: true,
+    },
+    /** Group and auto merge the CI dependencies */
+    {
+      matchFileNames: ['.github/**', '.pre-commit-config.yaml', 'ci/**'],
+      groupName: 'CI dependencies',
+      automerge: true,
+      separateMajorMinor: false,
+      separateMinorPatch: false,
     },
   ],
 }
