@@ -11,7 +11,7 @@ ci:
     - jsonschema-validator
 repos:
   - repo: https://github.com/camptocamp/jsonschema-gentypes
-    rev: 2.3.0
+    rev: 2.4.0
     hooks:
       - id: jsonschema-gentypes
         files: |-
@@ -23,7 +23,7 @@ repos:
     hooks:
       - id: prettier
         additional_dependencies:
-          - prettier@3.1.1 # npm
+          - prettier@3.2.4 # npm
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.5.0
     hooks:
@@ -73,7 +73,7 @@ repos:
     hooks:
       - id: git-check
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.27.3
+    rev: 0.27.4
     hooks:
       - id: check-github-workflows
       - id: check-jsonschema
@@ -109,7 +109,7 @@ repos:
           - -p
           - pyramid_ogcapi
   - repo: https://github.com/psf/black
-    rev: 23.12.1
+    rev: 24.1.1
     hooks:
       - id: black
   - repo: https://github.com/PyCQA/prospector
