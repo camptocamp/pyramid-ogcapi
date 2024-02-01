@@ -112,9 +112,11 @@ class _SpecProxy:
             request = get_current_request()
             return [
                 {
-                    "url": f"http://localhost/{p.rstrip('/')}"
-                    if request is None
-                    else request.route_url("landing_page_html")
+                    "url": (
+                        f"http://localhost/{p.rstrip('/')}"
+                        if request is None
+                        else request.route_url("landing_page_html")
+                    )
                 }
                 for p in self._settings.get("pyramid_ogcapi", {}).get("route_prefix", [])
             ]
