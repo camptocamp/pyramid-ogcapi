@@ -62,7 +62,16 @@ class CollectionsCollectionidGetResponse200(TypedDict, total=False):
     """
 
     links: Required[list["_ComponentsSchemasLink"]]
-    """ Required property """
+    """
+    example:
+      - href: http://data.example.com/buildings
+        rel: item
+      - href: http://example.com/concepts/buildings.html
+        rel: describedby
+        type: text/html
+
+    Required property
+    """
 
     extent: "_ComponentsSchemasExtent"
     """
@@ -84,6 +93,9 @@ class CollectionsCollectionidGetResponse200(TypedDict, total=False):
 
     default:
       - http://www.opengis.net/def/crs/OGC/1.3/CRS84
+    example:
+      - http://www.opengis.net/def/crs/OGC/1.3/CRS84
+      - http://www.opengis.net/def/crs/EPSG/0/4326
     """
 
 
@@ -182,7 +194,12 @@ class CollectionsCollectionidItemsGetQuery(TypedDict, total=False):
     """
 
     bbox: "CollectionsCollectionidItemsGetQueryBbox"
-    """ Aggregation type: oneOf """
+    """
+    items:
+      type: number
+
+    Aggregation type: oneOf
+    """
 
     datetime: str
 
@@ -190,7 +207,12 @@ class CollectionsCollectionidItemsGetQuery(TypedDict, total=False):
 CollectionsCollectionidItemsGetQueryBbox = Union[
     "_CollectionscollectioniditemsgetquerybboxOneof0", "_CollectionscollectioniditemsgetquerybboxOneof1"
 ]
-""" Aggregation type: oneOf """
+"""
+items:
+  type: number
+
+Aggregation type: oneOf
+"""
 
 
 CollectionsCollectionidItemsGetQueryLimit = int
@@ -385,7 +407,16 @@ class _ComponentsSchemasCollection(TypedDict, total=False):
     """
 
     links: Required[list["_ComponentsSchemasLink"]]
-    """ Required property """
+    """
+    example:
+      - href: http://data.example.com/buildings
+        rel: item
+      - href: http://example.com/concepts/buildings.html
+        rel: describedby
+        type: text/html
+
+    Required property
+    """
 
     extent: "_ComponentsSchemasExtent"
     """
@@ -407,6 +438,9 @@ class _ComponentsSchemasCollection(TypedDict, total=False):
 
     default:
       - http://www.opengis.net/def/crs/OGC/1.3/CRS84
+    example:
+      - http://www.opengis.net/def/crs/OGC/1.3/CRS84
+      - http://www.opengis.net/def/crs/EPSG/0/4326
     """
 
 
@@ -480,6 +514,14 @@ If a feature has multiple spatial geometry properties, it is the decision of the
 server whether only a single spatial geometry property is used to determine
 the extent or all relevant geometries.
 
+items:
+  type: number
+example:
+  - -180
+  - -90
+  - 180
+  - 90
+
 Aggregation type: oneOf
 """
 
@@ -552,6 +594,9 @@ this is the Gregorian calendar.
 
 minItems: 2
 maxItems: 2
+example:
+  - '2011-11-11T12:22:11Z'
+  - null
 """
 
 
