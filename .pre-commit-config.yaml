@@ -11,7 +11,7 @@ ci:
     - jsonschema-validator
 repos:
   - repo: https://github.com/camptocamp/jsonschema-gentypes
-    rev: 2.4.0
+    rev: 2.5.0
     hooks:
       - id: jsonschema-gentypes
         files: |-
@@ -47,14 +47,14 @@ repos:
           )$
       - id: poetry-check
         additional_dependencies:
-          - poetry==1.7.1 # pypi
+          - poetry==1.8.2 # pypi
         exclude: |-
           (?x)^(
               acceptance_tests/pyproject\.toml
           )$
       - id: poetry-lock
         additional_dependencies:
-          - poetry==1.7.1 # pypi
+          - poetry==1.8.2 # pypi
         exclude: |-
           (?x)^(
               acceptance_tests/pyproject\.toml
@@ -73,7 +73,7 @@ repos:
     hooks:
       - id: git-check
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.27.4
+    rev: 0.28.0
     hooks:
       - id: check-github-workflows
       - id: check-jsonschema
@@ -98,7 +98,7 @@ repos:
         args:
           - --py39-plus
   - repo: https://github.com/PyCQA/autoflake
-    rev: v2.2.1
+    rev: v2.3.0
     hooks:
       - id: autoflake
   - repo: https://github.com/PyCQA/isort
@@ -109,7 +109,7 @@ repos:
           - -p
           - pyramid_ogcapi
   - repo: https://github.com/psf/black
-    rev: 24.1.1
+    rev: 24.2.0
     hooks:
       - id: black
   - repo: https://github.com/PyCQA/prospector
