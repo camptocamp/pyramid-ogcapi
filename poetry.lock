@@ -134,13 +134,13 @@ virtualenv = ["virtualenv (>=20.0.35)"]
 
 [[package]]
 name = "c2cwsgiutils"
-version = "6.0.4"
+version = "6.0.7"
 description = "Common utilities for Camptocamp WSGI applications"
 optional = true
-python-versions = ">=3.9,<3.12"
+python-versions = ">=3.9"
 files = [
-    {file = "c2cwsgiutils-6.0.4-py3-none-any.whl", hash = "sha256:1b5a126f75eebfac150742733bcd00b6b9dac2acf3398c7e29e859104e0021f9"},
-    {file = "c2cwsgiutils-6.0.4.tar.gz", hash = "sha256:9d91e3630f341697455728e17487f2e5cffe9f60ff3af4a7c8fceb656f372f1c"},
+    {file = "c2cwsgiutils-6.0.7-py3-none-any.whl", hash = "sha256:adfc2c9bf3aef5cc8fc2c990f91806c96f39526a7306b2c9f465b4b1484d505f"},
+    {file = "c2cwsgiutils-6.0.7.tar.gz", hash = "sha256:f16bf681c179c2fba6a701235bcdc2b3fed3af6b38b61b868fba9ca732cb328a"},
 ]
 
 [package.dependencies]
@@ -166,6 +166,7 @@ sentry-sdk = {version = "*", optional = true, markers = "extra == \"standard\" o
 SQLAlchemy = {version = "*", optional = true, markers = "extra == \"standard\" or extra == \"webserver\" or extra == \"all\""}
 SQLAlchemy-Utils = {version = "*", optional = true, markers = "extra == \"standard\" or extra == \"webserver\" or extra == \"all\""}
 ujson = "*"
+urllib3 = "*"
 "zope.interface" = {version = "*", optional = true, markers = "extra == \"standard\" or extra == \"webserver\" or extra == \"all\""}
 "zope.sqlalchemy" = {version = "*", optional = true, markers = "extra == \"standard\" or extra == \"webserver\" or extra == \"all\""}
 
@@ -1788,13 +1789,13 @@ files = [
 
 [[package]]
 name = "pytest"
-version = "7.4.3"
+version = "7.4.4"
 description = "pytest: simple powerful testing with Python"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "pytest-7.4.3-py3-none-any.whl", hash = "sha256:0d009c083ea859a71b76adf7c1d502e4bc170b80a8ef002da5806527b9591fac"},
-    {file = "pytest-7.4.3.tar.gz", hash = "sha256:d989d136982de4e3b29dabcc838ad581c64e8ed52c11fbe86ddebd9da0818cd5"},
+    {file = "pytest-7.4.4-py3-none-any.whl", hash = "sha256:b090cdf5ed60bf4c45261be03239c2c1c22df034fbffe691abe93cd80cea01d8"},
+    {file = "pytest-7.4.4.tar.gz", hash = "sha256:2cf0005922c6ace4a3e2ec8b4080eb0d9753fdc93107415332f50ce9e7994280"},
 ]
 
 [package.dependencies]
@@ -2805,4 +2806,4 @@ application = ["c2cwsgiutils"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9,<3.12"
-content-hash = "bb917729ce4ce8d6b2f3048bde03a963424df9e0aceeeb99de40361a72ba5866"
+content-hash = "54909f566d97464a01f0340b3b2818c392968bbc15b7f72ea13e00a9abe80529"
