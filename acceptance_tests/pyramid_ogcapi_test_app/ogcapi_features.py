@@ -2,7 +2,7 @@
 Automatically generated file from a JSON schema.
 """
 
-from typing import Any, Literal, TypedDict, Union
+from typing import Literal, TypedDict, Union
 
 from typing_extensions import Required
 
@@ -195,23 +195,23 @@ class CollectionsCollectionidItemsGetQuery(TypedDict, total=False):
 
     bbox: "CollectionsCollectionidItemsGetQueryBbox"
     """
-    items:
-      type: number
-
-    Aggregation type: oneOf
+    oneOf:
+      - maxItems: 4
+        minItems: 4
+      - maxItems: 6
+        minItems: 6
     """
 
     datetime: str
 
 
-CollectionsCollectionidItemsGetQueryBbox = Union[
-    "_CollectionscollectioniditemsgetquerybboxOneof0", "_CollectionscollectioniditemsgetquerybboxOneof1"
-]
+CollectionsCollectionidItemsGetQueryBbox = list[Union[int, float]]
 """
-items:
-  type: number
-
-Aggregation type: oneOf
+oneOf:
+  - maxItems: 4
+    minItems: 4
+  - maxItems: 6
+    minItems: 6
 """
 
 
@@ -364,24 +364,6 @@ _COMPONENTS_SCHEMAS_EXTENT_TEMPORAL_TRS_DEFAULT = "http://www.opengis.net/def/uo
 """ Default value of the field path 'components schemas extent temporal trs' """
 
 
-_CollectionscollectioniditemsgetquerybboxOneof0 = Union[
-    str, Union[int, float], dict[str, Any], None, bool, None
-]
-"""
-minItems: 4
-maxItems: 4
-"""
-
-
-_CollectionscollectioniditemsgetquerybboxOneof1 = Union[
-    str, Union[int, float], dict[str, Any], None, bool, None
-]
-"""
-minItems: 6
-maxItems: 6
-"""
-
-
 class _ComponentsSchemasCollection(TypedDict, total=False):
     id: Required[str]
     """
@@ -483,9 +465,7 @@ class _ComponentsSchemasExtentSpatial(TypedDict, total=False):
     """
 
 
-_ComponentsSchemasExtentSpatialBboxItem = Union[
-    "_ComponentsSchemasExtentSpatialBboxItemOneof0", "_ComponentsSchemasExtentSpatialBboxItemOneof1"
-]
+_ComponentsSchemasExtentSpatialBboxItem = list[Union[int, float]]
 """
 Each bounding box is provided as four or six numbers, depending on
 whether the coordinate reference system includes a vertical axis
@@ -514,33 +494,16 @@ If a feature has multiple spatial geometry properties, it is the decision of the
 server whether only a single spatial geometry property is used to determine
 the extent or all relevant geometries.
 
-items:
-  type: number
+oneOf:
+  - maxItems: 4
+    minItems: 4
+  - maxItems: 6
+    minItems: 6
 example:
   - -180
   - -90
   - 180
   - 90
-
-Aggregation type: oneOf
-"""
-
-
-_ComponentsSchemasExtentSpatialBboxItemOneof0 = Union[
-    str, Union[int, float], dict[str, Any], None, bool, None
-]
-"""
-minItems: 4
-maxItems: 4
-"""
-
-
-_ComponentsSchemasExtentSpatialBboxItemOneof1 = Union[
-    str, Union[int, float], dict[str, Any], None, bool, None
-]
-"""
-minItems: 6
-maxItems: 6
 """
 
 
