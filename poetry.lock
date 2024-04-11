@@ -134,13 +134,13 @@ virtualenv = ["virtualenv (>=20.0.35)"]
 
 [[package]]
 name = "c2cwsgiutils"
-version = "6.0.4"
+version = "6.0.8"
 description = "Common utilities for Camptocamp WSGI applications"
 optional = true
-python-versions = ">=3.9,<3.12"
+python-versions = ">=3.9"
 files = [
-    {file = "c2cwsgiutils-6.0.4-py3-none-any.whl", hash = "sha256:1b5a126f75eebfac150742733bcd00b6b9dac2acf3398c7e29e859104e0021f9"},
-    {file = "c2cwsgiutils-6.0.4.tar.gz", hash = "sha256:9d91e3630f341697455728e17487f2e5cffe9f60ff3af4a7c8fceb656f372f1c"},
+    {file = "c2cwsgiutils-6.0.8-py3-none-any.whl", hash = "sha256:2190e9e064ff7190e434767a13c132911e53d0d15fe99e0072da6e7c9586880f"},
+    {file = "c2cwsgiutils-6.0.8.tar.gz", hash = "sha256:b416a20a8490e30deed307811fba1b93d662c5d849fc36b0f94927f0440f2048"},
 ]
 
 [package.dependencies]
@@ -166,6 +166,7 @@ sentry-sdk = {version = "*", optional = true, markers = "extra == \"standard\" o
 SQLAlchemy = {version = "*", optional = true, markers = "extra == \"standard\" or extra == \"webserver\" or extra == \"all\""}
 SQLAlchemy-Utils = {version = "*", optional = true, markers = "extra == \"standard\" or extra == \"webserver\" or extra == \"all\""}
 ujson = "*"
+urllib3 = "*"
 "zope.interface" = {version = "*", optional = true, markers = "extra == \"standard\" or extra == \"webserver\" or extra == \"all\""}
 "zope.sqlalchemy" = {version = "*", optional = true, markers = "extra == \"standard\" or extra == \"webserver\" or extra == \"all\""}
 
@@ -1782,13 +1783,13 @@ files = [
 
 [[package]]
 name = "pytest"
-version = "7.4.3"
+version = "7.4.4"
 description = "pytest: simple powerful testing with Python"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "pytest-7.4.3-py3-none-any.whl", hash = "sha256:0d009c083ea859a71b76adf7c1d502e4bc170b80a8ef002da5806527b9591fac"},
-    {file = "pytest-7.4.3.tar.gz", hash = "sha256:d989d136982de4e3b29dabcc838ad581c64e8ed52c11fbe86ddebd9da0818cd5"},
+    {file = "pytest-7.4.4-py3-none-any.whl", hash = "sha256:b090cdf5ed60bf4c45261be03239c2c1c22df034fbffe691abe93cd80cea01d8"},
+    {file = "pytest-7.4.4.tar.gz", hash = "sha256:2cf0005922c6ace4a3e2ec8b4080eb0d9753fdc93107415332f50ce9e7994280"},
 ]
 
 [package.dependencies]
@@ -2632,13 +2633,13 @@ tests = ["PasteDeploy", "WSGIProxy2", "coverage", "pyquery", "pytest", "pytest-c
 
 [[package]]
 name = "werkzeug"
-version = "3.0.1"
+version = "3.0.2"
 description = "The comprehensive WSGI web application library."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "werkzeug-3.0.1-py3-none-any.whl", hash = "sha256:90a285dc0e42ad56b34e696398b8122ee4c681833fb35b8334a095d82c56da10"},
-    {file = "werkzeug-3.0.1.tar.gz", hash = "sha256:507e811ecea72b18a404947aded4b3390e1db8f826b494d76550ef45bb3b1dcc"},
+    {file = "werkzeug-3.0.2-py3-none-any.whl", hash = "sha256:3aac3f5da756f93030740bc235d3e09449efcf65f2f55e3602e1d851b8f48795"},
+    {file = "werkzeug-3.0.2.tar.gz", hash = "sha256:e39b645a6ac92822588e7b39a692e7828724ceae0b0d702ef96701f90e70128d"},
 ]
 
 [package.dependencies]
@@ -2838,4 +2839,4 @@ application = ["c2cwsgiutils"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9,<3.12"
-content-hash = "a83f2e7c7e0897a7f200de968b343cea4e691fa598a5a1ab9fe0d8a89fbc2a1c"
+content-hash = "bfe03d9bd41683aedb258d93657752b1ea2e896f3c78c3fd4c767b07760326a3"
