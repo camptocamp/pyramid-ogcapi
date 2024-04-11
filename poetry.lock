@@ -134,13 +134,13 @@ virtualenv = ["virtualenv (>=20.0.35)"]
 
 [[package]]
 name = "c2cwsgiutils"
-version = "6.0.4"
+version = "6.0.8"
 description = "Common utilities for Camptocamp WSGI applications"
 optional = true
-python-versions = ">=3.9,<3.12"
+python-versions = ">=3.9"
 files = [
-    {file = "c2cwsgiutils-6.0.4-py3-none-any.whl", hash = "sha256:1b5a126f75eebfac150742733bcd00b6b9dac2acf3398c7e29e859104e0021f9"},
-    {file = "c2cwsgiutils-6.0.4.tar.gz", hash = "sha256:9d91e3630f341697455728e17487f2e5cffe9f60ff3af4a7c8fceb656f372f1c"},
+    {file = "c2cwsgiutils-6.0.8-py3-none-any.whl", hash = "sha256:2190e9e064ff7190e434767a13c132911e53d0d15fe99e0072da6e7c9586880f"},
+    {file = "c2cwsgiutils-6.0.8.tar.gz", hash = "sha256:b416a20a8490e30deed307811fba1b93d662c5d849fc36b0f94927f0440f2048"},
 ]
 
 [package.dependencies]
@@ -166,6 +166,7 @@ sentry-sdk = {version = "*", optional = true, markers = "extra == \"standard\" o
 SQLAlchemy = {version = "*", optional = true, markers = "extra == \"standard\" or extra == \"webserver\" or extra == \"all\""}
 SQLAlchemy-Utils = {version = "*", optional = true, markers = "extra == \"standard\" or extra == \"webserver\" or extra == \"all\""}
 ujson = "*"
+urllib3 = "*"
 "zope.interface" = {version = "*", optional = true, markers = "extra == \"standard\" or extra == \"webserver\" or extra == \"all\""}
 "zope.sqlalchemy" = {version = "*", optional = true, markers = "extra == \"standard\" or extra == \"webserver\" or extra == \"all\""}
 
@@ -2806,4 +2807,4 @@ application = ["c2cwsgiutils"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9,<3.12"
-content-hash = "188abc61cbd7486608377a72a5895158ef61c7f0a69e63a73e55dc64d9724239"
+content-hash = "077410f2f419f27c96bcb71e9303b44bc1f1b5ca4b15eb7b33ec783f3ea1d6d4"
