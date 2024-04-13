@@ -42,6 +42,7 @@ c2cwsgiutils = { version = "6.0.8", optional = true, extras = ["standard", "oaut
 pyramid-mako = "1.1.0"
 openapi-core = "0.16.6"
 pillow = "10.3.0"
+idna = "3.7"
 
 [tool.poetry.group.dev.dependencies]
 prospector = { extras = ["with_mypy", "with_bandit", "with_pyroma"], version = "1.10.3" }
