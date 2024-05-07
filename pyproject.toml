@@ -42,7 +42,7 @@ c2cwsgiutils = { version = "6.0.8", optional = true, extras = ["standard", "oaut
 pyramid-mako = "1.1.0"
 openapi-core = "0.16.6"
 urllib3 = "2.0.7"
-werkzeug = "3.0.2"
+werkzeug = "3.0.3"
 pillow = "10.3.0"
 idna = "3.7"
 gunicorn = "22.0.0"
