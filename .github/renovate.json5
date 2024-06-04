@@ -56,10 +56,10 @@
     },
     /** Group Poetry packages */
     {
-      matchPackageNames: ['poetry', 'pip'],
       matchPackagePrefixes: ['poetry-'],
       groupName: 'Poetry',
       automerge: true,
+      matchDepNames: ['poetry', 'pip'],
     },
     /** Accept only the patch on stabilization branches */
     {
@@ -69,20 +69,20 @@
     },
     /** Support the 4 parts of shellcheck-py version with a v prefix */
     {
-      matchPackageNames: ['shellcheck-py/shellcheck-py'],
       versioning: 'regex:^v(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)\\.(?<build>\\d+)$',
+      matchDepNames: ['shellcheck-py/shellcheck-py'],
     },
     /** Disable upgrading the supported Python version */
     {
       matchFileNames: ['pyproject.toml'],
-      matchPackageNames: ['python'],
       enabled: false,
+      matchDepNames: ['python'],
     },
     /** Only LTS version of Node */
     {
       allowedVersions: '/(0|2|4|6|8)$/',
-      matchPackageNames: ['node'],
       enabled: false,
+      matchDepNames: ['node'],
     },
     /** Auto merge updates on CI files */
     {
