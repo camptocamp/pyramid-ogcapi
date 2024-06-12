@@ -46,7 +46,7 @@ werkzeug = "3.0.3"
 pillow = "10.3.0"
 idna = "3.7"
 gunicorn = "22.0.0"
-requests = "2.32.0"
+requests = "2.32.2"
 
 [tool.poetry.group.dev.dependencies]
 prospector = { extras = ["with_mypy", "with_bandit", "with_pyroma"], version = "1.10.3" }
