@@ -9,7 +9,7 @@ services:
       POSTGRES_DB: tests
 
   redis:
-    image: redis:7.2
+    image: redis:7.4
     user: www-data
     restart: unless-stopped
 
