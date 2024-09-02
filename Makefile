@@ -15,7 +15,7 @@ build: ## Build the acceptences test application Docker image
 .PHONY: run
 run: ## Run the acceptences application Docker image
 run: build
-	docker-compose up -d
+	docker compose up -d
 
 .PHONY: tests
 tests: ## Run the unit tests
@@ -27,4 +27,4 @@ tests:
 .PHONY: acceptance-tests
 acceptance-tests: ## Run the acceptance tests
 acceptance-tests: run
-	docker-compose exec -T application pytest -vv
+	docker compose exec -T application pytest -vv
