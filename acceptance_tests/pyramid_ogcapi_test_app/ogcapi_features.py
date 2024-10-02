@@ -2,9 +2,7 @@
 Automatically generated file from a JSON schema.
 """
 
-from typing import Literal, TypedDict, Union
-
-from typing_extensions import Required
+from typing import Literal, Required, TypedDict, Union
 
 
 class CollectionsCollectionidGet(TypedDict, total=False):
