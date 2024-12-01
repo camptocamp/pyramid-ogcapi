@@ -38,7 +38,7 @@ classifiers = [
 [tool.poetry.dependencies]
 python = ">=3.9,<3.12"
 pyramid-openapi3 = "0.16.0"
-c2cwsgiutils = { version = "6.0.8", optional = true, extras = ["standard", "oauth2", "test_images"] }
+c2cwsgiutils = { version = "6.0.9", optional = true, extras = ["standard", "oauth2", "test_images"] }
 pyramid-mako = "1.1.0"
 openapi-core = "0.16.6"
 
@@ -47,7 +47,7 @@ prospector = { extras = ["with_mypy", "with_bandit", "with_pyroma"], version = "
 prospector-profile-duplicated = "1.1.0"
 pytest = "8.0.2"
 pytest-cov = "6.0.0"
-WebTest = "3.0.1"
+WebTest = "3.0.2"
 
 [tool.poetry.extras]
 application = ["c2cwsgiutils"]
