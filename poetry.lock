@@ -2559,18 +2559,18 @@ testing = ["coverage", "pytest", "pytest-cov"]
 
 [[package]]
 name = "waitress"
-version = "2.1.2"
+version = "3.0.2"
 description = "Waitress WSGI server"
 optional = false
-python-versions = ">=3.7.0"
+python-versions = ">=3.9.0"
 files = [
-    {file = "waitress-2.1.2-py3-none-any.whl", hash = "sha256:7500c9625927c8ec60f54377d590f67b30c8e70ef4b8894214ac6e4cad233d2a"},
-    {file = "waitress-2.1.2.tar.gz", hash = "sha256:780a4082c5fbc0fde6a2fcfe5e26e6efc1e8f425730863c04085769781f51eba"},
+    {file = "waitress-3.0.2-py3-none-any.whl", hash = "sha256:c56d67fd6e87c2ee598b76abdd4e96cfad1f24cacdea5078d382b1f9d7b5ed2e"},
+    {file = "waitress-3.0.2.tar.gz", hash = "sha256:682aaaf2af0c44ada4abfb70ded36393f0e307f4ab9456a215ce0020baefc31f"},
 ]
 
 [package.extras]
 docs = ["Sphinx (>=1.8.1)", "docutils", "pylons-sphinx-themes (>=1.0.9)"]
-testing = ["coverage (>=5.0)", "pytest", "pytest-cover"]
+testing = ["coverage (>=7.6.0)", "pytest", "pytest-cov"]
 
 [[package]]
 name = "webob"
@@ -2589,18 +2589,18 @@ testing = ["coverage", "pytest (>=3.1.0)", "pytest-cov", "pytest-xdist"]
 
 [[package]]
 name = "webtest"
-version = "3.0.1"
+version = "3.0.2"
 description = "Helper to test WSGI applications"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "WebTest-3.0.1-py3-none-any.whl", hash = "sha256:b3bc75d020d0576ee93a5f149666045e58fe2400ea5f0c214d7430d7d213d0d0"},
-    {file = "webtest-3.0.1.tar.gz", hash = "sha256:493b5c802f8948a65b5e3a1ad5b2524ee5e1ab60cd713d9a3da3b8da082c06fe"},
+    {file = "WebTest-3.0.2-py3-none-any.whl", hash = "sha256:799846e169d15e0c1233ab4ab00ee4de59a5d964407d6f2945d89249328dbbdb"},
+    {file = "webtest-3.0.2.tar.gz", hash = "sha256:0b2de681c16f57b31da5cce6e94ff03cdc77bd86c37a57ba0ee27fed8e065ceb"},
 ]
 
 [package.dependencies]
 beautifulsoup4 = "*"
-waitress = ">=0.8.5"
+waitress = ">=3.0.2"
 WebOb = ">=1.2"
 
 [package.extras]
@@ -2816,4 +2816,4 @@ application = ["c2cwsgiutils"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9,<3.12"
-content-hash = "a1994165f40ed4cc74579187ca360145ba07ba7ab2066f1af98bf6afd23d80cd"
+content-hash = "9c9bca1db9b62d2458743a4ae96cbe25742816c1275beae98a9d70db31c13942"
