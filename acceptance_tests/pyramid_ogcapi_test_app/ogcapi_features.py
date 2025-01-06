@@ -203,7 +203,7 @@ class CollectionsCollectionidItemsGetQuery(TypedDict, total=False):
     datetime: str
 
 
-CollectionsCollectionidItemsGetQueryBbox = list[Union[int, float]]
+CollectionsCollectionidItemsGetQueryBbox = list[int | float]
 """
 oneOf:
   - maxItems: 4
@@ -463,7 +463,7 @@ class _ComponentsSchemasExtentSpatial(TypedDict, total=False):
     """
 
 
-_ComponentsSchemasExtentSpatialBboxItem = list[Union[int, float]]
+_ComponentsSchemasExtentSpatialBboxItem = list[int | float]
 """
 Each bounding box is provided as four or six numbers, depending on
 whether the coordinate reference system includes a vertical axis
@@ -505,7 +505,7 @@ example:
 """
 
 
-_ComponentsSchemasExtentSpatialCrs = Union[Literal["http://www.opengis.net/def/crs/OGC/1.3/CRS84"]]
+_ComponentsSchemasExtentSpatialCrs = Literal["http://www.opengis.net/def/crs/OGC/1.3/CRS84"]
 """
 Coordinate reference system of the coordinates in the spatial extent
 (property `bbox`). The default reference system is WGS 84 longitude/latitude.
@@ -568,7 +568,7 @@ nullable: True
 """
 
 
-_ComponentsSchemasExtentTemporalTrs = Union[Literal["http://www.opengis.net/def/uom/ISO-8601/0/Gregorian"]]
+_ComponentsSchemasExtentTemporalTrs = Literal["http://www.opengis.net/def/uom/ISO-8601/0/Gregorian"]
 """
 Coordinate reference system of the coordinates in the temporal extent
 (property `interval`). The default reference system is the Gregorian calendar.
