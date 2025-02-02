@@ -299,7 +299,7 @@ def register_routes(
 
 
 def typed_request(
-    func: Callable[[Any, pyramid.request.Request, Any], Any]
+    func: Callable[[Any, pyramid.request.Request, Any], Any],
 ) -> Callable[[Any, pyramid.request.Request], Any]:
     """
     Decorate for openapi views to have a typed request.
