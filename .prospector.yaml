@@ -1,9 +1,7 @@
 inherits:
   - duplicated
-strictness: veryhigh
-max-line-length: 110
-doc-warnings: true
-
+  - utils:base
+  - utils:fix
 ignore-paths:
   - acceptance_tests/pyramid_ogcapi_test_app/ogcapi_features.py
   - acceptance_tests/gunicorn.conf.py
@@ -26,16 +24,11 @@ pydocstyle:
     - D200 # One-line docstring should fit on one line with quotes
     - D203 # 1 blank line required before class docstring
 
-mypy:
-  run: true
-
-mccabe:
-  run: false
-
-bandit:
-  run: true
-  options:
-    config: .bandit.yaml
-
 pyorama:
   run: true
+mypy:
+  options:
+    python-version: '3.9'
+ruff:
+  options:
+    target-version: py39
